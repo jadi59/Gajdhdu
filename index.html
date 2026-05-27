@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>VaiperX Orange UI</title>
+<title>VaiperX PRO</title>
 
 <link rel="apple-touch-icon"
 href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
@@ -13,24 +13,24 @@ href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 <link rel="icon" type="image/png"
 href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 :root{
-    --bg:#fff7f0;
-    --panel:#ffffff;
-    --panel2:#fff3e8;
+    --bg:#fff8f1;
+    --card:#ffffff;
+    --soft:#fff1e3;
 
     --line:rgba(255,140,0,.12);
 
     --text:#1f1f1f;
-    --sub:#7b7b7b;
+    --sub:#808080;
 
     --orange:#ff8c00;
     --orange2:#ffb347;
 
-    --green:#00c977;
+    --green:#00c978;
 }
 
 *{
@@ -44,12 +44,13 @@ href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 body{
     width:100%;
     min-height:100vh;
-    overflow:hidden;
 
     background:
     radial-gradient(circle at top,
-    #ffe3c2 0%,
-    #fff7f0 55%);
+    #ffe0bb 0%,
+    #fff8f1 55%);
+
+    overflow:hidden;
 
     display:flex;
     justify-content:center;
@@ -58,28 +59,28 @@ body{
     color:var(--text);
 }
 
-/* ===== WINDOW ===== */
+/* ===== MAIN WINDOW ===== */
 
 .window{
     width:95%;
-    max-width:1200px;
+    max-width:1350px;
     height:92vh;
 
-    background:rgba(255,255,255,.92);
+    background:rgba(255,255,255,.78);
+
+    backdrop-filter:blur(30px);
 
     border:1px solid rgba(255,140,0,.12);
 
-    border-radius:30px;
+    border-radius:34px;
 
     overflow:hidden;
 
     display:flex;
 
     box-shadow:
-    0 25px 70px rgba(255,140,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.8);
-
-    backdrop-filter:blur(25px);
+    0 30px 80px rgba(255,140,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.9);
 
     position:relative;
 }
@@ -87,49 +88,97 @@ body{
 /* ===== SIDEBAR ===== */
 
 .sidebar{
-    width:280px;
+    width:300px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         180deg,
-        rgba(255,140,0,.12),
-        rgba(255,255,255,.7)
+        rgba(255,140,0,.10),
+        rgba(255,255,255,.60)
     );
 
-    border-right:1px solid var(--line);
+    border-right:1px solid rgba(255,140,0,.10);
 
     padding:24px;
+
+    position:relative;
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:15px;
 
-    margin-bottom:38px;
+    margin-bottom:35px;
 }
 
 .logo img{
-    width:72px;
-    height:72px;
+    width:74px;
+    height:74px;
 
-    border-radius:22px;
+    border-radius:24px;
 
-    border:1px solid rgba(255,140,0,.35);
+    border:1px solid rgba(255,140,0,.25);
 
     box-shadow:
-    0 12px 30px rgba(255,140,0,.22);
+    0 15px 35px rgba(255,140,0,.18);
 }
 
 .logo h1{
-    font-size:24px;
-    font-weight:800;
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:-1px;
 }
 
 .logo p{
+    margin-top:5px;
+
     font-size:11px;
-    letter-spacing:3px;
+    font-weight:700;
+
     color:var(--orange);
-    margin-top:4px;
+
+    letter-spacing:4px;
+}
+
+/* KEY */
+
+.key-box{
+    width:100%;
+
+    padding:18px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff9500,
+        #ffb84d
+    );
+
+    color:white;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 18px 35px rgba(255,140,0,.20);
+}
+
+.key-box span{
+    font-size:11px;
+    font-weight:700;
+    opacity:.85;
+    letter-spacing:2px;
+}
+
+.key-box h2{
+    margin-top:8px;
+
+    font-size:26px;
+    font-weight:900;
+
+    letter-spacing:2px;
 }
 
 /* NAV */
@@ -141,9 +190,9 @@ body{
 }
 
 .nav-item{
-    height:58px;
+    height:62px;
 
-    border-radius:18px;
+    border-radius:20px;
 
     background:rgba(255,255,255,.65);
 
@@ -151,26 +200,26 @@ body{
 
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:15px;
 
     padding:0 18px;
 
-    transition:.25s;
+    transition:.22s;
 }
 
 .nav-item.active{
     background:
     linear-gradient(
         90deg,
-        rgba(255,140,0,.18),
+        rgba(255,140,0,.16),
         rgba(255,255,255,.75)
     );
 
     border-color:
-    rgba(255,140,0,.28);
+    rgba(255,140,0,.24);
 
     box-shadow:
-    0 12px 25px rgba(255,140,0,.12);
+    0 12px 25px rgba(255,140,0,.10);
 }
 
 .nav-item:active{
@@ -178,10 +227,10 @@ body{
 }
 
 .nav-icon{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
 
-    border-radius:12px;
+    border-radius:14px;
 
     background:rgba(255,140,0,.12);
 
@@ -194,7 +243,7 @@ body{
 
 .nav-item span{
     font-size:14px;
-    font-weight:600;
+    font-weight:700;
 }
 
 /* ===== MAIN ===== */
@@ -207,9 +256,9 @@ body{
     overflow:auto;
 }
 
-/* TOP BAR */
+/* TOP */
 
-.topbar{
+.top{
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -220,43 +269,48 @@ body{
 .status{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
 }
 
 .dot{
-    width:12px;
-    height:12px;
+    width:13px;
+    height:13px;
 
     border-radius:50%;
 
     background:var(--green);
 
     box-shadow:
-    0 0 12px var(--green);
+    0 0 14px var(--green);
 }
 
 .status h2{
-    font-size:18px;
-    font-weight:700;
+    font-size:20px;
+    font-weight:800;
 }
 
 .status p{
-    font-size:12px;
+    margin-top:4px;
+
     color:var(--sub);
-    margin-top:3px;
+
+    font-size:12px;
 }
 
 .premium{
-    padding:12px 18px;
+    padding:14px 18px;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    background:rgba(255,255,255,.75);
+    background:white;
 
     border:1px solid rgba(255,140,0,.08);
 
     font-size:13px;
-    font-weight:700;
+    font-weight:800;
+
+    box-shadow:
+    0 10px 25px rgba(255,140,0,.05);
 }
 
 /* GRID */
@@ -273,13 +327,13 @@ body{
     background:
     linear-gradient(
         180deg,
-        rgba(255,255,255,.95),
-        rgba(255,247,240,.92)
+        rgba(255,255,255,.92),
+        rgba(255,248,241,.96)
     );
 
     border:1px solid rgba(255,140,0,.08);
 
-    border-radius:26px;
+    border-radius:30px;
 
     padding:24px;
 
@@ -293,24 +347,26 @@ body{
 
     position:absolute;
 
-    width:220px;
-    height:220px;
+    width:250px;
+    height:250px;
 
     border-radius:50%;
 
     background:
     radial-gradient(
-        rgba(255,140,0,.12),
+        rgba(255,140,0,.10),
         transparent 70%
     );
 
-    top:-120px;
-    right:-120px;
+    top:-130px;
+    right:-130px;
 }
 
 .card h3{
-    font-size:16px;
-    margin-bottom:18px;
+    font-size:17px;
+    font-weight:800;
+
+    margin-bottom:20px;
 }
 
 /* SETTINGS */
@@ -337,10 +393,10 @@ body{
 }
 
 .mini{
-    width:44px;
-    height:44px;
+    width:46px;
+    height:46px;
 
-    border-radius:14px;
+    border-radius:16px;
 
     background:rgba(255,140,0,.08);
 
@@ -353,13 +409,14 @@ body{
 
 .left h4{
     font-size:14px;
-    font-weight:600;
+    font-weight:700;
 }
 
 .left p{
+    margin-top:3px;
+
     font-size:12px;
     color:var(--sub);
-    margin-top:3px;
 }
 
 /* SWITCH */
@@ -367,8 +424,8 @@ body{
 .switch{
     position:relative;
 
-    width:58px;
-    height:30px;
+    width:60px;
+    height:32px;
 }
 
 .switch input{
@@ -379,7 +436,7 @@ body{
     position:absolute;
     inset:0;
 
-    background:#d9d9d9;
+    background:#dddddd;
 
     border-radius:50px;
 
@@ -391,8 +448,8 @@ body{
 
     position:absolute;
 
-    width:24px;
-    height:24px;
+    width:26px;
+    height:26px;
 
     border-radius:50%;
 
@@ -415,7 +472,7 @@ body{
     transform:translateX(28px);
 }
 
-/* BUTTONS */
+/* ACTIONS */
 
 .actions{
     display:flex;
@@ -427,16 +484,16 @@ body{
 .btn{
     flex:1;
 
-    height:60px;
+    height:62px;
 
     border:none;
 
-    border-radius:18px;
+    border-radius:20px;
 
     font-size:15px;
-    font-weight:800;
+    font-weight:900;
 
-    transition:.25s;
+    transition:.22s;
 }
 
 .btn:active{
@@ -447,22 +504,25 @@ body{
     background:
     linear-gradient(
         135deg,
-        #ff8c00,
-        #ffb347
+        #ff9500,
+        #ffb84d
     );
 
     color:white;
 
     box-shadow:
-    0 15px 35px rgba(255,140,0,.25);
+    0 18px 35px rgba(255,140,0,.20);
 }
 
-.sec-btn{
-    background:rgba(255,255,255,.8);
+.second-btn{
+    background:white;
+
+    border:1px solid rgba(255,140,0,.08);
 
     color:#333;
 
-    border:1px solid rgba(255,140,0,.08);
+    box-shadow:
+    0 10px 25px rgba(255,140,0,.05);
 }
 
 /* WARNING */
@@ -470,23 +530,28 @@ body{
 .warning{
     margin-top:22px;
 
+    border-radius:22px;
+
     padding:18px;
 
-    border-radius:18px;
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,140,0,.10),
+        rgba(255,255,255,.7)
+    );
 
-    background:rgba(255,140,0,.08);
-
-    border:1px solid rgba(255,140,0,.15);
+    border:1px solid rgba(255,140,0,.10);
 
     display:flex;
     gap:14px;
 }
 
 .warn-icon{
-    width:50px;
-    height:50px;
+    width:52px;
+    height:52px;
 
-    border-radius:14px;
+    border-radius:16px;
 
     background:rgba(255,140,0,.12);
 
@@ -499,18 +564,22 @@ body{
 
 .warning h4{
     font-size:14px;
+    font-weight:800;
+
     margin-bottom:4px;
 }
 
 .warning p{
+    color:#cc7700;
+
     font-size:12px;
-    color:#c96b00;
+
     line-height:1.5;
 }
 
 /* MOBILE */
 
-@media(max-width:900px){
+@media(max-width:950px){
 
     body{
         padding:12px;
@@ -521,23 +590,25 @@ body{
         flex-direction:column;
         height:auto;
         min-height:100vh;
-        border-radius:24px;
+
+        border-radius:26px;
     }
 
     .sidebar{
         width:100%;
+
         border-right:none;
-        border-bottom:1px solid var(--line);
+        border-bottom:1px solid rgba(255,140,0,.10);
     }
 
     .grid{
         grid-template-columns:1fr;
     }
 
-    .topbar{
-        gap:12px;
+    .top{
         flex-direction:column;
         align-items:flex-start;
+        gap:14px;
     }
 
     .actions{
@@ -561,10 +632,22 @@ body{
 
             <div>
                 <h1>VaiperX</h1>
-                <p>DESKTOP MODE</p>
+                <p>ULTRA PRO</p>
             </div>
 
         </div>
+
+        <!-- KEY -->
+
+        <div class="key-box">
+
+            <span>PREMIUM ACCESS KEY</span>
+
+            <h2>858525</h2>
+
+        </div>
+
+        <!-- NAV -->
 
         <div class="nav">
 
@@ -596,7 +679,9 @@ body{
 
     <div class="main">
 
-        <div class="topbar">
+        <!-- TOP -->
+
+        <div class="top">
 
             <div class="status">
 
@@ -604,13 +689,13 @@ body{
 
                 <div>
                     <h2>System Connected</h2>
-                    <p>Encrypted Connection Active</p>
+                    <p>Encrypted connection established</p>
                 </div>
 
             </div>
 
             <div class="premium">
-                PREMIUM ACCESS
+                PREMIUM USER
             </div>
 
         </div>
@@ -619,7 +704,7 @@ body{
 
         <div class="grid">
 
-            <!-- CARD 1 -->
+            <!-- CARD -->
 
             <div class="card">
 
@@ -633,13 +718,13 @@ body{
 
                         <div>
                             <h4>ตัวหัว</h4>
-                            <p>Advanced Aim System</p>
+                            <p>Advanced lock system</p>
                         </div>
 
                     </div>
 
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" checked>
                         <span class="slider"></span>
                     </label>
 
@@ -653,13 +738,13 @@ body{
 
                         <div>
                             <h4>ดูดหัว</h4>
-                            <p>Magnetic Lock</p>
+                            <p>Magnetic precision mode</p>
                         </div>
 
                     </div>
 
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" checked>
                         <span class="slider"></span>
                     </label>
 
@@ -673,13 +758,13 @@ body{
 
                         <div>
                             <h4>กันแบน</h4>
-                            <p>Realtime Protection</p>
+                            <p>Realtime shield protection</p>
                         </div>
 
                     </div>
 
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" checked>
                         <span class="slider"></span>
                     </label>
 
@@ -687,11 +772,11 @@ body{
 
             </div>
 
-            <!-- CARD 2 -->
+            <!-- CARD -->
 
             <div class="card">
 
-                <h3>System Control</h3>
+                <h3>System Controls</h3>
 
                 <div class="setting">
 
@@ -701,7 +786,7 @@ body{
 
                         <div>
                             <h4>กันดำ</h4>
-                            <p>Visual Protection</p>
+                            <p>Visual secure protection</p>
                         </div>
 
                     </div>
@@ -721,7 +806,7 @@ body{
 
                         <div>
                             <h4>Ultra Speed</h4>
-                            <p>Performance Mode</p>
+                            <p>High performance engine</p>
                         </div>
 
                     </div>
@@ -741,7 +826,7 @@ body{
 
                         <div>
                             <h4>Proxy Tunnel</h4>
-                            <p>Secure Network Route</p>
+                            <p>Secure proxy connection</p>
                         </div>
 
                     </div>
@@ -757,17 +842,22 @@ body{
 
         </div>
 
-        <!-- BUTTONS -->
+        <!-- ACTIONS -->
 
         <div class="actions">
 
-            <button class="btn main-btn"
+            <button
+            class="btn main-btn"
             id="activateBtn">
+
                 ACTIVATE SYSTEM
+
             </button>
 
-            <button class="btn sec-btn">
+            <button class="btn second-btn">
+
                 CONFIG PANEL
+
             </button>
 
         </div>
@@ -781,12 +871,14 @@ body{
             </div>
 
             <div>
+
                 <h4>System Notice</h4>
 
                 <p>
                     โปรดใช้งานผ่านต้นฉบับ VaiperX เท่านั้น
-                    เพื่อความปลอดภัยและความเสถียรสูงสุด
+                    เพื่อความเสถียรและความปลอดภัยสูงสุด
                 </p>
+
             </div>
 
         </div>
@@ -797,29 +889,31 @@ body{
 
 <script>
 
-const activateBtn =
+const btn =
 document.getElementById("activateBtn");
 
-activateBtn.onclick = () => {
+btn.onclick = () => {
 
-    activateBtn.innerHTML =
+    btn.innerHTML =
     "CONNECTING...";
 
-    activateBtn.style.opacity = ".8";
+    btn.style.opacity = ".85";
 
     setTimeout(() => {
 
-        activateBtn.innerHTML =
+        btn.innerHTML =
         "SYSTEM ACTIVE";
 
-        activateBtn.style.background =
-        "#00c977";
+        btn.style.background =
+        "#00c978";
 
-        activateBtn.style.color =
+        btn.style.color =
         "#fff";
 
-        /* เปิด Proxy / Potatso */
-        window.location.href = "potatso://";
+        /* เปิด Potatso / Proxy */
+
+        window.location.href =
+        "potatso://";
 
     },1500);
 
