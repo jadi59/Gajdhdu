@@ -5,7 +5,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>VaiperX Desktop UI</title>
+<title>VaiperX Orange UI</title>
 
 <link rel="apple-touch-icon"
 href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
@@ -18,19 +18,19 @@ href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
-    --bg:#06070b;
-    --panel:#0f1218;
-    --panel2:#151922;
+    --bg:#fff7f0;
+    --panel:#ffffff;
+    --panel2:#fff3e8;
 
-    --line:rgba(255,255,255,.06);
+    --line:rgba(255,140,0,.12);
 
-    --text:#fff;
-    --sub:#9ca3af;
+    --text:#1f1f1f;
+    --sub:#7b7b7b;
 
-    --red:#ff003c;
-    --red2:#ff335f;
+    --orange:#ff8c00;
+    --orange2:#ffb347;
 
-    --green:#00ff99;
+    --green:#00c977;
 }
 
 *{
@@ -48,8 +48,8 @@ body{
 
     background:
     radial-gradient(circle at top,
-    #1a0a11 0%,
-    #06070b 55%);
+    #ffe3c2 0%,
+    #fff7f0 55%);
 
     display:flex;
     justify-content:center;
@@ -58,16 +58,16 @@ body{
     color:var(--text);
 }
 
-/* ===== DESKTOP STYLE WINDOW ===== */
+/* ===== WINDOW ===== */
 
 .window{
     width:95%;
     max-width:1200px;
     height:92vh;
 
-    background:rgba(12,14,20,.95);
+    background:rgba(255,255,255,.92);
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,140,0,.12);
 
     border-radius:30px;
 
@@ -76,8 +76,8 @@ body{
     display:flex;
 
     box-shadow:
-    0 25px 70px rgba(0,0,0,.7),
-    inset 0 1px 0 rgba(255,255,255,.03);
+    0 25px 70px rgba(255,140,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.8);
 
     backdrop-filter:blur(25px);
 
@@ -88,10 +88,11 @@ body{
 
 .sidebar{
     width:280px;
+
     background:linear-gradient(
         180deg,
-        rgba(255,0,60,.08),
-        rgba(255,255,255,.015)
+        rgba(255,140,0,.12),
+        rgba(255,255,255,.7)
     );
 
     border-right:1px solid var(--line);
@@ -113,10 +114,10 @@ body{
 
     border-radius:22px;
 
-    border:1px solid rgba(255,0,60,.4);
+    border:1px solid rgba(255,140,0,.35);
 
     box-shadow:
-    0 12px 30px rgba(255,0,60,.25);
+    0 12px 30px rgba(255,140,0,.22);
 }
 
 .logo h1{
@@ -127,9 +128,11 @@ body{
 .logo p{
     font-size:11px;
     letter-spacing:3px;
-    color:var(--red2);
+    color:var(--orange);
     margin-top:4px;
 }
+
+/* NAV */
 
 .nav{
     display:flex;
@@ -142,9 +145,9 @@ body{
 
     border-radius:18px;
 
-    background:rgba(255,255,255,.03);
+    background:rgba(255,255,255,.65);
 
-    border:1px solid rgba(255,255,255,.04);
+    border:1px solid rgba(255,140,0,.08);
 
     display:flex;
     align-items:center;
@@ -159,15 +162,15 @@ body{
     background:
     linear-gradient(
         90deg,
-        rgba(255,0,60,.16),
-        rgba(255,255,255,.03)
+        rgba(255,140,0,.18),
+        rgba(255,255,255,.75)
     );
 
     border-color:
-    rgba(255,0,60,.28);
+    rgba(255,140,0,.28);
 
     box-shadow:
-    0 12px 25px rgba(255,0,60,.12);
+    0 12px 25px rgba(255,140,0,.12);
 }
 
 .nav-item:active{
@@ -180,7 +183,7 @@ body{
 
     border-radius:12px;
 
-    background:rgba(255,0,60,.12);
+    background:rgba(255,140,0,.12);
 
     display:flex;
     justify-content:center;
@@ -248,9 +251,9 @@ body{
 
     border-radius:14px;
 
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.75);
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(255,140,0,.08);
 
     font-size:13px;
     font-weight:700;
@@ -270,11 +273,11 @@ body{
     background:
     linear-gradient(
         180deg,
-        rgba(255,255,255,.03),
-        rgba(255,255,255,.015)
+        rgba(255,255,255,.95),
+        rgba(255,247,240,.92)
     );
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(255,140,0,.08);
 
     border-radius:26px;
 
@@ -297,7 +300,7 @@ body{
 
     background:
     radial-gradient(
-        rgba(255,0,60,.14),
+        rgba(255,140,0,.12),
         transparent 70%
     );
 
@@ -310,7 +313,7 @@ body{
     margin-bottom:18px;
 }
 
-/* SETTING */
+/* SETTINGS */
 
 .setting{
     display:flex;
@@ -320,7 +323,7 @@ body{
     padding:16px 0;
 
     border-bottom:
-    1px solid rgba(255,255,255,.04);
+    1px solid rgba(255,140,0,.06);
 }
 
 .setting:last-child{
@@ -339,7 +342,7 @@ body{
 
     border-radius:14px;
 
-    background:rgba(255,255,255,.04);
+    background:rgba(255,140,0,.08);
 
     display:flex;
     justify-content:center;
@@ -376,7 +379,7 @@ body{
     position:absolute;
     inset:0;
 
-    background:#272c35;
+    background:#d9d9d9;
 
     border-radius:50px;
 
@@ -402,10 +405,10 @@ body{
 }
 
 .switch input:checked + .slider{
-    background:var(--red);
+    background:var(--orange);
 
     box-shadow:
-    0 0 15px rgba(255,0,60,.4);
+    0 0 15px rgba(255,140,0,.35);
 }
 
 .switch input:checked + .slider::before{
@@ -444,22 +447,22 @@ body{
     background:
     linear-gradient(
         135deg,
-        #ff003c,
-        #ff3366
+        #ff8c00,
+        #ffb347
     );
 
     color:white;
 
     box-shadow:
-    0 15px 35px rgba(255,0,60,.25);
+    0 15px 35px rgba(255,140,0,.25);
 }
 
 .sec-btn{
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.8);
 
-    color:white;
+    color:#333;
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(255,140,0,.08);
 }
 
 /* WARNING */
@@ -471,9 +474,9 @@ body{
 
     border-radius:18px;
 
-    background:rgba(255,0,60,.08);
+    background:rgba(255,140,0,.08);
 
-    border:1px solid rgba(255,0,60,.18);
+    border:1px solid rgba(255,140,0,.15);
 
     display:flex;
     gap:14px;
@@ -485,7 +488,7 @@ body{
 
     border-radius:14px;
 
-    background:rgba(255,0,60,.15);
+    background:rgba(255,140,0,.12);
 
     display:flex;
     justify-content:center;
@@ -501,11 +504,11 @@ body{
 
 .warning p{
     font-size:12px;
-    color:#ff7d96;
+    color:#c96b00;
     line-height:1.5;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -612,9 +615,11 @@ body{
 
         </div>
 
+        <!-- GRID -->
+
         <div class="grid">
 
-            <!-- CARD -->
+            <!-- CARD 1 -->
 
             <div class="card">
 
@@ -682,7 +687,7 @@ body{
 
             </div>
 
-            <!-- CARD -->
+            <!-- CARD 2 -->
 
             <div class="card">
 
@@ -752,11 +757,10 @@ body{
 
         </div>
 
-        <!-- ACTION -->
+        <!-- BUTTONS -->
 
         <div class="actions">
 
-            <!-- เปิด Potatso / Proxy -->
             <button class="btn main-btn"
             id="activateBtn">
                 ACTIVATE SYSTEM
@@ -809,12 +813,12 @@ activateBtn.onclick = () => {
         "SYSTEM ACTIVE";
 
         activateBtn.style.background =
-        "#00ff99";
+        "#00c977";
 
         activateBtn.style.color =
-        "#000";
+        "#fff";
 
-        /* เด้งเข้าพร็อกซี่เหมือนโค้ดเก่า */
+        /* เปิด Proxy / Potatso */
         window.location.href = "potatso://";
 
     },1500);
