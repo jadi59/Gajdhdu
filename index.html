@@ -2,28 +2,35 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>VaiperX Desktop UI</title>
 
-<link rel="apple-touch-icon" href="https://i.postimg.cc/FRmHVHMB/8A4F4CD3-757A-4C82-9FDE-58D18D10B9A2.jpg">
-<link rel="icon" type="image/png" href="https://i.postimg.cc/FRmHVHMB/8A4F4CD3-757A-4C82-9FDE-58D18D10B9A2.jpg">
+<link rel="apple-touch-icon"
+href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
+
+<link rel="icon" type="image/png"
+href="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
     --bg:#06070b;
-    --panel:#10131a;
-    --panel2:#161b24;
+    --panel:#0f1218;
+    --panel2:#151922;
+
     --line:rgba(255,255,255,.06);
 
-    --text:#ffffff;
-    --text2:#9ea7b8;
+    --text:#fff;
+    --sub:#9ca3af;
 
     --red:#ff003c;
-    --red2:#ff3366;
+    --red2:#ff335f;
 
-    --green:#00ff9d;
+    --green:#00ff99;
 }
 
 *{
@@ -31,37 +38,48 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Inter',sans-serif;
-    user-select:none;
     -webkit-tap-highlight-color:transparent;
 }
 
 body{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     overflow:hidden;
+
     background:
-    radial-gradient(circle at top,#1a0a0f 0%,#06070b 55%);
+    radial-gradient(circle at top,
+    #1a0a11 0%,
+    #06070b 55%);
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     color:var(--text);
 }
 
-/* ===== DESKTOP WINDOW ===== */
+/* ===== DESKTOP STYLE WINDOW ===== */
 
-.desktop-window{
-    width:1100px;
-    height:680px;
-    background:rgba(13,16,22,.96);
+.window{
+    width:95%;
+    max-width:1200px;
+    height:92vh;
+
+    background:rgba(12,14,20,.95);
+
     border:1px solid rgba(255,255,255,.06);
-    border-radius:28px;
+
+    border-radius:30px;
+
     overflow:hidden;
+
     display:flex;
-    backdrop-filter:blur(25px);
 
     box-shadow:
-    0 30px 80px rgba(0,0,0,.65),
+    0 25px 70px rgba(0,0,0,.7),
     inset 0 1px 0 rgba(255,255,255,.03);
+
+    backdrop-filter:blur(25px);
 
     position:relative;
 }
@@ -73,37 +91,40 @@ body{
     background:linear-gradient(
         180deg,
         rgba(255,0,60,.08),
-        rgba(255,255,255,.02)
+        rgba(255,255,255,.015)
     );
 
     border-right:1px solid var(--line);
+
     padding:24px;
-    position:relative;
 }
 
-.logo-box{
+.logo{
     display:flex;
     align-items:center;
-    gap:15px;
-    margin-bottom:40px;
+    gap:14px;
+
+    margin-bottom:38px;
 }
 
-.logo-box img{
-    width:70px;
-    height:70px;
-    border-radius:20px;
+.logo img{
+    width:72px;
+    height:72px;
+
+    border-radius:22px;
+
     border:1px solid rgba(255,0,60,.4);
 
     box-shadow:
-    0 10px 30px rgba(255,0,60,.25);
+    0 12px 30px rgba(255,0,60,.25);
 }
 
-.logo-title h1{
-    font-size:22px;
+.logo h1{
+    font-size:24px;
     font-weight:800;
 }
 
-.logo-title p{
+.logo p{
     font-size:11px;
     letter-spacing:3px;
     color:var(--red2);
@@ -113,56 +134,59 @@ body{
 .nav{
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:14px;
 }
 
 .nav-item{
-    width:100%;
     height:58px;
+
     border-radius:18px;
+
     background:rgba(255,255,255,.03);
+
     border:1px solid rgba(255,255,255,.04);
 
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:14px;
 
     padding:0 18px;
+
     transition:.25s;
-    cursor:pointer;
-}
-
-.nav-item:hover{
-    transform:translateX(5px);
-    border-color:rgba(255,0,60,.25);
-
-    background:rgba(255,255,255,.05);
 }
 
 .nav-item.active{
-    background:linear-gradient(
+    background:
+    linear-gradient(
         90deg,
-        rgba(255,0,60,.18),
+        rgba(255,0,60,.16),
         rgba(255,255,255,.03)
     );
 
-    border-color:rgba(255,0,60,.35);
+    border-color:
+    rgba(255,0,60,.28);
 
     box-shadow:
-    0 10px 25px rgba(255,0,60,.12);
+    0 12px 25px rgba(255,0,60,.12);
 }
 
-.icon{
+.nav-item:active{
+    transform:scale(.98);
+}
+
+.nav-icon{
     width:38px;
     height:38px;
+
     border-radius:12px;
+
     background:rgba(255,0,60,.12);
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    color:var(--red);
+    font-size:18px;
 }
 
 .nav-item span{
@@ -170,72 +194,81 @@ body{
     font-weight:600;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ===== MAIN ===== */
 
 .main{
     flex:1;
-    padding:30px;
-    position:relative;
-    overflow:hidden;
+
+    padding:28px;
+
+    overflow:auto;
 }
 
 /* TOP BAR */
 
 .topbar{
-    width:100%;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:28px;
+
+    margin-bottom:24px;
 }
 
-.status-box{
+.status{
     display:flex;
     align-items:center;
     gap:12px;
 }
 
-.status-dot{
+.dot{
     width:12px;
     height:12px;
+
     border-radius:50%;
+
     background:var(--green);
 
     box-shadow:
     0 0 12px var(--green);
 }
 
-.status-box h2{
+.status h2{
     font-size:18px;
     font-weight:700;
 }
 
-.status-box p{
+.status p{
     font-size:12px;
-    color:var(--text2);
+    color:var(--sub);
+    margin-top:3px;
 }
 
-.badge{
+.premium{
     padding:12px 18px;
+
     border-radius:14px;
 
     background:rgba(255,255,255,.04);
+
     border:1px solid rgba(255,255,255,.05);
 
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
 }
 
-/* DASHBOARD */
+/* GRID */
 
-.dashboard{
+.grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:20px;
 }
 
+/* CARD */
+
 .card{
-    background:linear-gradient(
+    background:
+    linear-gradient(
         180deg,
         rgba(255,255,255,.03),
         rgba(255,255,255,.015)
@@ -243,20 +276,28 @@ body{
 
     border:1px solid rgba(255,255,255,.05);
 
-    border-radius:24px;
+    border-radius:26px;
+
     padding:24px;
 
     position:relative;
+
     overflow:hidden;
 }
 
 .card::before{
     content:"";
+
     position:absolute;
+
     width:220px;
     height:220px;
-    background:radial-gradient(
-        rgba(255,0,60,.16),
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        rgba(255,0,60,.14),
         transparent 70%
     );
 
@@ -266,8 +307,10 @@ body{
 
 .card h3{
     font-size:16px;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
+
+/* SETTING */
 
 .setting{
     display:flex;
@@ -275,22 +318,25 @@ body{
     align-items:center;
 
     padding:16px 0;
-    border-bottom:1px solid rgba(255,255,255,.04);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.04);
 }
 
 .setting:last-child{
     border:none;
 }
 
-.setting-left{
+.left{
     display:flex;
     align-items:center;
     gap:14px;
 }
 
-.setting-left .mini{
-    width:42px;
-    height:42px;
+.mini{
+    width:44px;
+    height:44px;
+
     border-radius:14px;
 
     background:rgba(255,255,255,.04);
@@ -298,16 +344,18 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+
+    font-size:18px;
 }
 
-.setting-text h4{
+.left h4{
     font-size:14px;
     font-weight:600;
 }
 
-.setting-text p{
+.left p{
     font-size:12px;
-    color:var(--text2);
+    color:var(--sub);
     margin-top:3px;
 }
 
@@ -315,6 +363,7 @@ body{
 
 .switch{
     position:relative;
+
     width:58px;
     height:30px;
 }
@@ -326,28 +375,35 @@ body{
 .slider{
     position:absolute;
     inset:0;
-    border-radius:50px;
+
     background:#272c35;
-    transition:.3s;
-    cursor:pointer;
+
+    border-radius:50px;
+
+    transition:.25s;
 }
 
 .slider::before{
     content:"";
+
     position:absolute;
+
     width:24px;
     height:24px;
+
     border-radius:50%;
+
     background:white;
 
     top:3px;
     left:3px;
 
-    transition:.3s;
+    transition:.25s;
 }
 
 .switch input:checked + .slider{
     background:var(--red);
+
     box-shadow:
     0 0 15px rgba(255,0,60,.4);
 }
@@ -358,26 +414,35 @@ body{
 
 /* BUTTONS */
 
-.action-area{
-    margin-top:24px;
+.actions{
     display:flex;
-    gap:15px;
+    gap:16px;
+
+    margin-top:24px;
 }
 
 .btn{
     flex:1;
-    height:58px;
+
+    height:60px;
+
     border:none;
+
     border-radius:18px;
 
     font-size:15px;
-    font-weight:700;
-    cursor:pointer;
+    font-weight:800;
+
     transition:.25s;
 }
 
-.btn-main{
-    background:linear-gradient(
+.btn:active{
+    transform:scale(.97);
+}
+
+.main-btn{
+    background:
+    linear-gradient(
         135deg,
         #ff003c,
         #ff3366
@@ -389,39 +454,37 @@ body{
     0 15px 35px rgba(255,0,60,.25);
 }
 
-.btn-main:hover{
-    transform:translateY(-2px);
-}
-
-.btn-second{
+.sec-btn{
     background:rgba(255,255,255,.04);
+
     color:white;
+
     border:1px solid rgba(255,255,255,.05);
 }
 
 /* WARNING */
 
 .warning{
-    position:absolute;
-    bottom:25px;
-    left:30px;
-    right:30px;
+    margin-top:22px;
 
-    background:rgba(255,0,60,.08);
-    border:1px solid rgba(255,0,60,.18);
+    padding:18px;
 
     border-radius:18px;
-    padding:18px 20px;
+
+    background:rgba(255,0,60,.08);
+
+    border:1px solid rgba(255,0,60,.18);
 
     display:flex;
-    align-items:center;
-    gap:15px;
+    gap:14px;
 }
 
-.warning-icon{
-    width:48px;
-    height:48px;
+.warn-icon{
+    width:50px;
+    height:50px;
+
     border-radius:14px;
+
     background:rgba(255,0,60,.15);
 
     display:flex;
@@ -433,12 +496,13 @@ body{
 
 .warning h4{
     font-size:14px;
-    margin-bottom:5px;
+    margin-bottom:4px;
 }
 
 .warning p{
     font-size:12px;
-    color:#ff7a94;
+    color:#ff7d96;
+    line-height:1.5;
 }
 
 /* ===== MOBILE ===== */
@@ -446,14 +510,15 @@ body{
 @media(max-width:900px){
 
     body{
-        padding:18px;
-        align-items:flex-start;
+        padding:12px;
+        overflow:auto;
     }
 
-    .desktop-window{
-        width:100%;
-        height:auto;
+    .window{
         flex-direction:column;
+        height:auto;
+        min-height:100vh;
+        border-radius:24px;
     }
 
     .sidebar{
@@ -462,55 +527,61 @@ body{
         border-bottom:1px solid var(--line);
     }
 
-    .dashboard{
+    .grid{
         grid-template-columns:1fr;
     }
 
-    .warning{
-        position:relative;
-        left:auto;
-        right:auto;
-        bottom:auto;
-        margin-top:20px;
+    .topbar{
+        gap:12px;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{
+        flex-direction:column;
     }
 }
+
 </style>
 </head>
 <body>
 
-<div class="desktop-window">
+<div class="window">
 
     <!-- SIDEBAR -->
+
     <div class="sidebar">
 
-        <div class="logo-box">
+        <div class="logo">
+
             <img src="https://i.postimg.cc/dtPNnP5B/1208970E-0281-4988-A5EE-6B8EBF602D01.png">
 
-            <div class="logo-title">
+            <div>
                 <h1>VaiperX</h1>
-                <p>ULTRA DESKTOP</p>
+                <p>DESKTOP MODE</p>
             </div>
+
         </div>
 
         <div class="nav">
 
             <div class="nav-item active">
-                <div class="icon">⚡</div>
+                <div class="nav-icon">⚡</div>
                 <span>Protection</span>
             </div>
 
             <div class="nav-item">
-                <div class="icon">🛡️</div>
+                <div class="nav-icon">🛡️</div>
                 <span>Security</span>
             </div>
 
             <div class="nav-item">
-                <div class="icon">🎯</div>
+                <div class="nav-icon">🎯</div>
                 <span>Target</span>
             </div>
 
             <div class="nav-item">
-                <div class="icon">⚙️</div>
+                <div class="nav-icon">⚙️</div>
                 <span>Settings</span>
             </div>
 
@@ -519,41 +590,47 @@ body{
     </div>
 
     <!-- MAIN -->
+
     <div class="main">
 
         <div class="topbar">
 
-            <div class="status-box">
-                <div class="status-dot"></div>
+            <div class="status">
+
+                <div class="dot"></div>
 
                 <div>
                     <h2>System Connected</h2>
                     <p>Encrypted Connection Active</p>
                 </div>
+
             </div>
 
-            <div class="badge">
+            <div class="premium">
                 PREMIUM ACCESS
             </div>
 
         </div>
 
-        <div class="dashboard">
+        <div class="grid">
 
             <!-- CARD -->
+
             <div class="card">
 
                 <h3>Protection Modules</h3>
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">🎯</div>
 
-                        <div class="setting-text">
+                        <div>
                             <h4>ตัวหัว</h4>
-                            <p>Advanced Target Lock</p>
+                            <p>Advanced Aim System</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -565,13 +642,15 @@ body{
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">🧲</div>
 
-                        <div class="setting-text">
+                        <div>
                             <h4>ดูดหัว</h4>
-                            <p>Magnetic Aim Assist</p>
+                            <p>Magnetic Lock</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -583,13 +662,15 @@ body{
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">🛡️</div>
 
-                        <div class="setting-text">
+                        <div>
                             <h4>กันแบน</h4>
                             <p>Realtime Protection</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -602,19 +683,22 @@ body{
             </div>
 
             <!-- CARD -->
+
             <div class="card">
 
                 <h3>System Control</h3>
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">🔒</div>
 
-                        <div class="setting-text">
+                        <div>
                             <h4>กันดำ</h4>
-                            <p>Visual Security Layer</p>
+                            <p>Visual Protection</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -626,13 +710,15 @@ body{
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">⚡</div>
 
-                        <div class="setting-text">
+                        <div>
                             <h4>Ultra Speed</h4>
-                            <p>High Performance Mode</p>
+                            <p>Performance Mode</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -644,13 +730,15 @@ body{
 
                 <div class="setting">
 
-                    <div class="setting-left">
+                    <div class="left">
+
                         <div class="mini">🌐</div>
 
-                        <div class="setting-text">
-                            <h4>VPN Tunnel</h4>
+                        <div>
+                            <h4>Proxy Tunnel</h4>
                             <p>Secure Network Route</p>
                         </div>
+
                     </div>
 
                     <label class="switch">
@@ -664,28 +752,36 @@ body{
 
         </div>
 
-        <div class="action-area">
+        <!-- ACTION -->
 
-            <button class="btn btn-main" id="activateBtn">
+        <div class="actions">
+
+            <!-- เปิด Potatso / Proxy -->
+            <button class="btn main-btn"
+            id="activateBtn">
                 ACTIVATE SYSTEM
             </button>
 
-            <button class="btn btn-second">
+            <button class="btn sec-btn">
                 CONFIG PANEL
             </button>
 
         </div>
 
+        <!-- WARNING -->
+
         <div class="warning">
 
-            <div class="warning-icon">
+            <div class="warn-icon">
                 ⚠️
             </div>
 
             <div>
                 <h4>System Notice</h4>
+
                 <p>
-                    โปรดใช้งานผ่านต้นฉบับ VaiperX เท่านั้นเพื่อความปลอดภัยสูงสุด
+                    โปรดใช้งานผ่านต้นฉบับ VaiperX เท่านั้น
+                    เพื่อความปลอดภัยและความเสถียรสูงสุด
                 </p>
             </div>
 
@@ -696,21 +792,35 @@ body{
 </div>
 
 <script>
-const btn = document.getElementById("activateBtn");
 
-btn.onclick = () => {
+const activateBtn =
+document.getElementById("activateBtn");
 
-    btn.innerHTML = "CONNECTING...";
+activateBtn.onclick = () => {
+
+    activateBtn.innerHTML =
+    "CONNECTING...";
+
+    activateBtn.style.opacity = ".8";
 
     setTimeout(() => {
 
-        btn.innerHTML = "SYSTEM ACTIVE";
-        btn.style.background = "#00ff9d";
-        btn.style.color = "#000";
+        activateBtn.innerHTML =
+        "SYSTEM ACTIVE";
 
-    },2000);
+        activateBtn.style.background =
+        "#00ff99";
+
+        activateBtn.style.color =
+        "#000";
+
+        /* เด้งเข้าพร็อกซี่เหมือนโค้ดเก่า */
+        window.location.href = "potatso://";
+
+    },1500);
 
 };
+
 </script>
 
 </body>
