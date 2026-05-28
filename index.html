@@ -920,5 +920,150 @@ btn.onclick = () => {
 
 </script>
 
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+setDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+
+authDomain: "reczssa.firebaseapp.com",
+
+projectId: "reczssa",
+
+storageBucket: "reczssa.firebasestorage.app",
+
+messagingSenderId: "726475292690",
+
+appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* =========================
+   DEVICE ID
+========================= */
+
+function getDeviceID(){
+
+let id =
+localStorage.getItem("device_id");
+
+if(!id){
+
+id =
+"device_" +
+Math.random().toString(36).substring(2);
+
+localStorage.setItem(
+"device_id",
+id
+);
+
+}
+
+return id;
+
+}
+
+/* =========================
+   KEY SYSTEM
+========================= */
+
+async function checkKey(){
+
+const key =
+prompt("ENTER KEY");
+
+if(!key) return;
+
+const ref =
+doc(db,"keys",key);
+
+const snap =
+await getDoc(ref);
+
+if(!snap.exists()){
+
+alert("KEY INVALID");
+return;
+
+}
+
+const data =
+snap.data();
+
+const deviceID =
+getDeviceID();
+
+/* CHECK EXPIRE */
+
+if(
+Date.now() >
+data.expire
+){
+
+alert("KEY EXPIRED");
+return;
+
+}
+
+/* HWID LOCK */
+
+if(
+!data.device
+){
+
+await setDoc(ref,{
+
+...data,
+
+device:deviceID
+
+});
+
+}
+else if(
+data.device !== deviceID
+){
+
+alert(
+"KEY ALREADY USED"
+);
+
+document.body.innerHTML =
+"<h1 style='color:red;text-align:center;margin-top:100px'>ACCESS DENIED</h1>";
+
+return;
+
+}
+
+alert("LOGIN SUCCESS");
+
+}
+
+checkKey();
+
+</script>
+
 </body>
 </html>
