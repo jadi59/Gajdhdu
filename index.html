@@ -1,281 +1,315 @@
+iant=“document” id=“58391”}
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VaiperX ULTRA PRO</title>
-
 <style>
 body{
 margin:0;
-font-family:Inter;
+font-family:Arial;
 overflow:hidden;
 background:url("https://images.unsplash.com/photo-1520975958225-4f6f7a6d3b14?auto=format&fit=crop&w=1600&q=80");
 background-size:cover;
 background-position:center;
 }
-
 body::before{
 content:"";
 position:fixed;
 inset:0;
-background:rgba(255,255,255,0.35);
+background:rgba(255,255,255,.35);
 backdrop-filter:blur(10px);
 }
-
-#login{
-position:fixed;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-background:rgba(0,0,0,0.6);
-}
-
-.box{
-width:320px;
-background:#111;
-padding:25px;
-border-radius:18px;
-border:1px solid #ff0033;
-text-align:center;
-animation:pop .3s ease;
-}
-
-@keyframes pop{
-from{transform:scale(.8);opacity:0}
-to{transform:scale(1);opacity:1}
-}
-
-input{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:none;
-margin-top:10px;
-outline:none;
-}
-
-button{
-width:100%;
-padding:12px;
-margin-top:12px;
-border:none;
-border-radius:10px;
-background:#ff0033;
-color:#fff;
-font-weight:800;
-cursor:pointer;
-}
-
-.shake{animation:shake .3s}
-
-@keyframes shake{
-0%{transform:translateX(0)}
-25%{transform:translateX(-6px)}
-50%{transform:translateX(6px)}
-75%{transform:translateX(-6px)}
-100%{transform:translateX(0)}
-}
-
-#app{
-display:none;
-position:relative;
-z-index:2;
-animation:fade .4s ease;
-}
-
-@keyframes fade{
-from{opacity:0;transform:scale(.98)}
-to{opacity:1;transform:scale(1)}
-}
-
-.window{
-width:90%;
-max-width:420px;
-margin:40px auto;
-background:rgba(13,13,17,0.95);
-border-radius:30px;
-padding:25px;
-color:#fff;
-box-shadow:0 25px 60px rgba(0,0,0,0.6);
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-padding:14px;
-margin-top:10px;
-background:rgba(255,255,255,0.05);
-border-radius:15px;
-}
-
-.switch{
-width:40px;height:22px;
-background:#333;
-border-radius:20px;
-position:relative;
-}
-
-.switch::after{
-content:"";
-width:18px;height:18px;
-background:#fff;
-position:absolute;
-top:2px;left:2px;
-border-radius:50%;
-transition:.2s;
-}
-
 #toast{
 position:fixed;
 top:20px;
 left:50%;
 transform:translateX(-50%);
-padding:10px 16px;
-border-radius:10px;
 background:#ff0033;
+padding:12px 18px;
+border-radius:10px;
 color:#fff;
 font-weight:700;
 opacity:0;
 transition:.3s;
 z-index:99999;
 }
-
 #toast.show{
 opacity:1;
-transform:translateX(-50%) translateY(10px);
+}
+#login{
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.55);
+z-index:9999;
+}
+.box{
+width:320px;
+padding:25px;
+border-radius:20px;
+background:#111;
+border:1px solid #ff0033;
+text-align:center;
+}
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+outline:none;
+box-sizing:border-box;
+}
+button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+background:#ff0033;
+font-weight:800;
+color:white;
+cursor:pointer;
+}
+#app{
+display:none;
+position:relative;
+z-index:5;
+}
+.window{
+width:90%;
+max-width:420px;
+margin:40px auto;
+padding:25px;
+background:#111;
+border-radius:25px;
+color:white;
+}
+.row{
+display:flex;
+justify-content:space-between;
+padding:14px;
+background:#1d1d1d;
+margin-top:10px;
+border-radius:12px;
+}
+.switch{
+width:42px;
+height:22px;
+background:#333;
+border-radius:20px;
 }
 </style>
 </head>
-
 <body>
-
 <div id="toast"></div>
-
 <div id="login">
 <div class="box">
-<h2 style="color:#fff">ENTER KEY</h2>
-<input id="key" placeholder="KEY">
-<button onclick="login()">LOGIN</button>
+<h1 style="color:white">
+ENTER KEY
+</h1>
+<input
+id="key"
+placeholder="VIP001"
+>
+<button onclick="login()">
+LOGIN
+</button>
 </div>
 </div>
-
 <div id="app">
 <div class="window">
-<h2>VAIPERX MENU</h2>
-
-<div class="row"><span>หัว</span><div class="switch"></div></div>
-<div class="row"><span>ดูดหัว</span><div class="switch"></div></div>
-<div class="row"><span>กันแบน</span><div class="switch"></div></div>
-<div class="row"><span>กันดำ</span><div class="switch"></div></div>
-
+<h2>
+VAIPERX MENU
+</h2>
+<div class="row">
+<span>หัว</span>
+<div class="switch"></div>
+</div>
+<div class="row">
+<span>ดูดหัว</span>
+<div class="switch"></div>
+</div>
+<div class="row">
+<span>กันแบน</span>
+<div class="switch"></div>
+</div>
+<div class="row">
+<span>กันดำ</span>
+<div class="switch"></div>
 </div>
 </div>
-
+</div>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
-authDomain: "reczssa.firebaseapp.com",
-projectId: "reczssa",
-storageBucket: "reczssa.firebasestorage.app",
-messagingSenderId: "726475292690",
-appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+getFirestore,
+doc,
+getDoc,
+setDoc
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig={
+apiKey:"AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+authDomain:"reczssa.firebaseapp.com",
+projectId:"reczssa",
+storageBucket:"reczssa.firebasestorage.app",
+messagingSenderId:"726475292690",
+appId:"1:726475292690:web:12d844b3b605ad650cd8cb"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* DEVICE ID */
-function device(){
-let id = localStorage.getItem("dev");
+const app=
+initializeApp(
+firebaseConfig
+);
+const db=
+getFirestore(
+app
+);
+function toast(text){
+const t=
+document.getElementById(
+"toast"
+);
+t.innerText=text;
+t.classList.add(
+"show"
+);
+setTimeout(()=>{
+t.classList.remove(
+"show"
+)
+},2000)
+}
+function deviceID(){
+let id=
+localStorage.getItem(
+"device"
+);
 if(!id){
-id = crypto.randomUUID();
-localStorage.setItem("dev",id);
+id=
+crypto.randomUUID();
+localStorage.setItem(
+"device",
+id
+);
 }
 return id;
 }
-
-/* TOAST */
-function toast(text){
-const t = document.getElementById("toast");
-t.innerText = text;
-t.classList.add("show");
-setTimeout(()=>t.classList.remove("show"),2000);
-}
-
-/* LOGIN FIXED */
-window.login = async function(){
-
+window.login=
+async()=>{
 try{
-
-const box = document.querySelector(".box");
-const key = document.getElementById("key").value.trim().toUpperCase();
-
+const key=
+document
+.getElementById(
+"key"
+)
+.value
+.trim()
+.toUpperCase();
 if(!key){
-box.classList.add("shake");
-toast("ENTER KEY");
-setTimeout(()=>box.classList.remove("shake"),400);
+toast(
+"ENTER KEY"
+);
 return;
 }
-
-const ref = doc(db,"keys",key);
-const snap = await getDoc(ref);
-
-if(!snap.exists()){
-box.classList.add("shake");
-toast("INVALID KEY ❌");
+const ref=
+doc(
+db,
+"keys",
+key
+);
+const snap=
+await getDoc(
+ref
+);
+if(
+!snap.exists()
+){
+toast(
+"INVALID KEY ❌"
+);
 return;
 }
-
-const data = snap.data();
-
-/* BAN */
-if(data.banned === true){
-toast("KEY BANNED 🚫");
+const data=
+snap.data();
+if(
+data.banned===true
+){
+toast(
+"KEY BANNED 🚫"
+);
 return;
 }
-
-/* EXPIRE SAFE */
-const expireTime = Number(data.expire);
-
-if(!expireTime || Date.now() > expireTime){
-toast("KEY EXPIRED ⏳");
+const expire=
+new Date(
+data.expire
+).getTime();
+if(
+Date.now()
+>
+expire
+){
+toast(
+"KEY EXPIRED ⏳"
+);
 return;
 }
-
-/* DEVICE LOCK */
-const dev = device();
-
-if(!data.device){
-await setDoc(ref,{
+const dev=
+deviceID();
+if(
+!data.device ||
+data.device===""
+){
+await setDoc(
+ref,
+{
 ...data,
 device:dev,
 used:true
-});
+},
+{
+merge:true
 }
-else if(data.device !== dev){
-toast("DEVICE LOCKED 🚫");
+);
+}
+else if(
+data.device!==dev
+){
+toast(
+"DEVICE LOCKED 🚫"
+);
 return;
 }
-
-/* SUCCESS */
-toast("LOGIN SUCCESS ✅");
-
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
-
-}catch(e){
-console.log(e);
-toast("FIREBASE ERROR ❌");
+toast(
+"LOGIN SUCCESS ✅"
+);
+document
+.getElementById(
+"login"
+)
+.style.display=
+"none";
+document
+.getElementById(
+"app"
+)
+.style.display=
+"block";
 }
-
-};
-</script>
-
-</body>
-</html>
+catch(e){
+console.log(e);
+toast(
+"FIREBASE ERROR ❌"
+);
+}
+}
