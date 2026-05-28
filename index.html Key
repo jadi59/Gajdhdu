@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ADMIN PANEL</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0d0d0f;
+    color:#fff;
+}
+
+.box{
+    width:320px;
+    margin:80px auto;
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #333;
+}
+
+input,button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    background:#ff0033;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.green{background:#00c978;}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h2>ADMIN PANEL</h2>
+
+<input id="adminPass" placeholder="ADMIN PASSWORD">
+
+<hr>
+
+<input id="keyName" placeholder="NEW KEY">
+<input id="expire" placeholder="EXPIRE (days)">
+
+<button onclick="createKey()">CREATE KEY</button>
+
+<hr>
+
+<input id="banKey" placeholder="KEY TO BAN">
+<button class="green" onclick="banKey()">BAN KEY</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:"YOUR_KEY",
+authDomain:"YOUR_DOMAIN",
+projectId:"YOUR_ID",
+storageBucket:"YOUR_BUCKET",
+messagingSenderId:"YOUR_ID",
+appId:"YOUR_APP"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* ADMIN CHECK */
+function checkAdmin(){
+    const pass = document.getElementById("adminPass").value;
+    return pass === "123456"; // เปลี่ยนรหัสตรงนี้
+}
+
+/* CREATE KEY */
+window.createKey = async function(){
+
+if(!checkAdmin()){
+alert("WRONG ADMIN");
+return;
+}
+
+const key = document.getElementById("keyName").value;
+const days = parseInt(document.getElementById("expire").value);
+
+const expire = Date.now() + (days * 86400000);
+
+await setDoc(doc(db,"keys",key),{
+expire:expire,
+device:null,
+banned:false,
+createdAt:Date.now()
+});
+
+alert("KEY CREATED");
+};
+
+/* BAN KEY */
+window.banKey = async function(){
+
+if(!checkAdmin()){
+alert("WRONG ADMIN");
+return;
+}
+
+const key = document.getElementById("banKey").value;
+
+await updateDoc(doc(db,"keys",key),{
+banned:true
+});
+
+alert("KEY BANNED");
+};
+
+</script>
+
+</body>
+</html>
