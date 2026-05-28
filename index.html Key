@@ -112,12 +112,12 @@ getDoc
 
 /* 🔥 ใส่ Firebase ของคุณ */
 const firebaseConfig = {
-apiKey: "YOUR_API_KEY",
-authDomain: "YOUR_AUTH",
-projectId: "YOUR_PROJECT",
-storageBucket: "YOUR_BUCKET",
-messagingSenderId: "YOUR_ID",
-appId: "YOUR_APP"
+apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+  authDomain: "reczssa.firebaseapp.com",
+  projectId: "reczssa",
+  storageBucket: "reczssa.firebasestorage.app",
+  messagingSenderId: "726475292690",
+  appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
 };
 
 const app = initializeApp(firebaseConfig);
