@@ -1,126 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-<meta charset="utf-8">
-<title>ADMIN PANEL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN KEY PANEL</title>
+
 <style>
 body{
-    margin:0;
-    font-family:Arial;
-    background:#0d0d0f;
-    color:#fff;
+margin:0;
+font-family:sans-serif;
+background:#0d0d12;
+color:#fff;
+display:flex;
+justify-content:center;
+padding:20px;
+}
+
+.panel{
+width:100%;
+max-width:800px;
 }
 
 .box{
-    width:320px;
-    margin:80px auto;
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    border:1px solid #333;
+background:#1a1a22;
+padding:20px;
+border-radius:15px;
+margin-bottom:15px;
+border:1px solid #333;
 }
 
 input,button{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:10px;
-    border:none;
+padding:10px;
+border-radius:10px;
+border:none;
+margin:5px;
+}
+
+input{
+width:120px;
 }
 
 button{
-    background:#ff0033;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
+cursor:pointer;
+background:#ff8c00;
+color:#fff;
+font-weight:bold;
 }
 
-.green{background:#00c978;}
+.key-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+background:#111;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #222;
+}
+
+.badge{
+padding:3px 8px;
+border-radius:8px;
+font-size:12px;
+}
+
+.red{background:red;}
+.green{background:green;}
 </style>
 </head>
+
 <body>
 
+<div class="panel">
+
+<h2>📊 ADMIN PANEL</h2>
+
+<!-- CREATE -->
 <div class="box">
+<h3>สร้างคีย์</h3>
 
-<h2>ADMIN PANEL</h2>
+<input id="prefix" placeholder="PREFIX (VIP)">
+<input id="amount" placeholder="จำนวน" type="number">
+<input id="days" placeholder="วันหมดอายุ" type="number">
 
-<input id="adminPass" placeholder="ADMIN PASSWORD">
+<button onclick="createKeys()">สร้าง</button>
+</div>
 
-<hr>
+<!-- SEARCH -->
+<div class="box">
+<h3>ค้นหาคีย์</h3>
+<input id="search" placeholder="ใส่คีย์">
+<button onclick="searchKey()">ค้นหา</button>
+</div>
 
-<input id="keyName" placeholder="NEW KEY">
-<input id="expire" placeholder="EXPIRE (days)">
-
-<button onclick="createKey()">CREATE KEY</button>
-
-<hr>
-
-<input id="banKey" placeholder="KEY TO BAN">
-<button class="green" onclick="banKey()">BAN KEY</button>
+<!-- RESULT -->
+<div class="box">
+<h3>RESULT</h3>
+<div id="result"></div>
+</div>
 
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* 🔥 ใส่ Firebase ของคุณ */
 const firebaseConfig = {
-apiKey:"YOUR_KEY",
-authDomain:"YOUR_DOMAIN",
-projectId:"YOUR_ID",
-storageBucket:"YOUR_BUCKET",
-messagingSenderId:"YOUR_ID",
-appId:"YOUR_APP"
+apiKey: "YOUR_API_KEY",
+authDomain: "YOUR_AUTH",
+projectId: "YOUR_PROJECT",
+storageBucket: "YOUR_BUCKET",
+messagingSenderId: "YOUR_ID",
+appId: "YOUR_APP"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* ADMIN CHECK */
-function checkAdmin(){
-    const pass = document.getElementById("adminPass").value;
-    return pass === "123456"; // เปลี่ยนรหัสตรงนี้
-}
+/* =========================
+   CREATE MULTI KEYS
+========================= */
+window.createKeys = async function(){
 
-/* CREATE KEY */
-window.createKey = async function(){
+const prefix = document.getElementById("prefix").value || "VIP";
+const amount = parseInt(document.getElementById("amount").value || 1);
+const days = parseInt(document.getElementById("days").value || 1);
 
-if(!checkAdmin()){
-alert("WRONG ADMIN");
-return;
-}
+let output = "";
 
-const key = document.getElementById("keyName").value;
-const days = parseInt(document.getElementById("expire").value);
+for(let i=0;i<amount;i++){
 
-const expire = Date.now() + (days * 86400000);
+const key = prefix + "-" + Math.random().toString(36).substring(2,8).toUpperCase();
 
 await setDoc(doc(db,"keys",key),{
-expire:expire,
-device:null,
+createdAt: Date.now(),
+expire: Date.now() + (days*86400000),
 banned:false,
-createdAt:Date.now()
+device:null
 });
 
-alert("KEY CREATED");
+output += key + "\n";
+}
+
+alert("สร้างคีย์เสร็จ");
+
+document.getElementById("result").innerText = output;
+
 };
 
-/* BAN KEY */
-window.banKey = async function(){
+/* =========================
+   SEARCH KEY
+========================= */
+window.searchKey = async function(){
 
-if(!checkAdmin()){
-alert("WRONG ADMIN");
+const key = document.getElementById("search").value.trim();
+const result = document.getElementById("result");
+
+if(!key) return;
+
+const ref = doc(db,"keys",key);
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+result.innerHTML = "❌ ไม่พบคีย์";
 return;
 }
 
-const key = document.getElementById("banKey").value;
+const data = snap.data();
 
-await updateDoc(doc(db,"keys",key),{
-banned:true
-});
+result.innerHTML = `
+<div class="key-item">
+<div>
+<b>${key}</b><br>
+<small>expire: ${new Date(data.expire).toLocaleString()}</small><br>
+<span class="badge ${data.banned ? 'red':'green'}">
+${data.banned ? 'BANNED':'ACTIVE'}
+</span>
+</div>
 
-alert("KEY BANNED");
+<div>
+<button onclick="copyKey('${key}')">COPY</button>
+<button onclick="banKey('${key}')">BAN</button>
+<button onclick="unbanKey('${key}')">UNBAN</button>
+</div>
+</div>
+`;
+
+};
+
+/* =========================
+   COPY KEY
+========================= */
+window.copyKey = function(key){
+navigator.clipboard.writeText(key);
+alert("COPIED: " + key);
+};
+
+/* =========================
+   BAN / UNBAN
+========================= */
+window.banKey = async function(key){
+await setDoc(doc(db,"keys",key),{banned:true},{merge:true});
+alert("BANNED");
+searchKey();
+};
+
+window.unbanKey = async function(key){
+await setDoc(doc(db,"keys",key),{banned:false},{merge:true});
+alert("UNBANNED");
+searchKey();
 };
 
 </script>
