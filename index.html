@@ -6,13 +6,10 @@
 <title>VaiperX ULTRA PRO</title>
 
 <style>
-
-/* ===== BACKGROUND ===== */
 body{
 margin:0;
 font-family:Inter;
 overflow:hidden;
-
 background:url("https://images.unsplash.com/photo-1520975958225-4f6f7a6d3b14?auto=format&fit=crop&w=1600&q=80");
 background-size:cover;
 background-position:center;
@@ -26,7 +23,6 @@ background:rgba(255,255,255,0.35);
 backdrop-filter:blur(10px);
 }
 
-/* ===== LOGIN ===== */
 #login{
 position:fixed;
 inset:0;
@@ -83,7 +79,6 @@ cursor:pointer;
 100%{transform:translateX(0)}
 }
 
-/* ===== APP ===== */
 #app{
 display:none;
 position:relative;
@@ -96,7 +91,6 @@ from{opacity:0;transform:scale(.98)}
 to{opacity:1;transform:scale(1)}
 }
 
-/* ===== UI เดิมคุณ ===== */
 .window{
 width:90%;
 max-width:420px;
@@ -134,7 +128,6 @@ border-radius:50%;
 transition:.2s;
 }
 
-/* ===== TOAST ===== */
 #toast{
 position:fixed;
 top:20px;
@@ -154,7 +147,6 @@ z-index:99999;
 opacity:1;
 transform:translateX(-50%) translateY(10px);
 }
-
 </style>
 </head>
 
@@ -162,7 +154,6 @@ transform:translateX(-50%) translateY(10px);
 
 <div id="toast"></div>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="box">
 <h2 style="color:#fff">ENTER KEY</h2>
@@ -171,11 +162,8 @@ transform:translateX(-50%) translateY(10px);
 </div>
 </div>
 
-<!-- APP -->
 <div id="app">
-
 <div class="window">
-
 <h2>VAIPERX MENU</h2>
 
 <div class="row"><span>หัว</span><div class="switch"></div></div>
@@ -187,7 +175,6 @@ transform:translateX(-50%) translateY(10px);
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -203,7 +190,7 @@ appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* DEVICE */
+/* DEVICE ID */
 function device(){
 let id = localStorage.getItem("dev");
 if(!id){
@@ -221,15 +208,14 @@ t.classList.add("show");
 setTimeout(()=>t.classList.remove("show"),2000);
 }
 
-/* LOGIN */
+/* LOGIN FIXED */
 window.login = async function(){
 
 try{
 
 const box = document.querySelector(".box");
-const key = document.getElementById("key").value.trim();
+const key = document.getElementById("key").value.trim().toUpperCase();
 
-/* empty */
 if(!key){
 box.classList.add("shake");
 toast("ENTER KEY");
@@ -240,7 +226,6 @@ return;
 const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
 
-/* not found */
 if(!snap.exists()){
 box.classList.add("shake");
 toast("INVALID KEY ❌");
@@ -249,21 +234,21 @@ return;
 
 const data = snap.data();
 
-/* banned */
+/* BAN */
 if(data.banned === true){
 toast("KEY BANNED 🚫");
 return;
 }
 
-/* expire */
-const expireTime = Number(data.expire || 0);
+/* EXPIRE SAFE */
+const expireTime = Number(data.expire);
 
-if(Date.now() > expireTime){
+if(!expireTime || Date.now() > expireTime){
 toast("KEY EXPIRED ⏳");
 return;
 }
 
-/* device lock */
+/* DEVICE LOCK */
 const dev = device();
 
 if(!data.device){
@@ -278,21 +263,18 @@ toast("DEVICE LOCKED 🚫");
 return;
 }
 
-/* success */
+/* SUCCESS */
 toast("LOGIN SUCCESS ✅");
 
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
 
-}
-
-catch(e){
+}catch(e){
 console.log(e);
 toast("FIREBASE ERROR ❌");
 }
 
 };
-
 </script>
 
 </body>
