@@ -97,7 +97,7 @@ button{
     to{opacity:1;transform:scale(1)}
 }
 
-/* ================= VAIPER UI (ยัดของคุณ) ================= */
+/* ================= VAIPER UI (เดิมคุณ) ================= */
 .window{
     width:90%;
     max-width:420px;
@@ -148,16 +148,19 @@ button{
     opacity:0;
     transition:.3s;
     z-index:999999;
+    background:#ff0033;
 }
 
-#toast.show{opacity:1;transform:translateX(-50%) translateY(10px)}
+#toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(10px);
+}
 
 </style>
 </head>
 
 <body>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
 <!-- LOGIN -->
@@ -166,7 +169,6 @@ button{
 <h2 style="color:#fff">ENTER KEY</h2>
 <input id="key" placeholder="KEY">
 <button onclick="login()">LOGIN</button>
-<p id="msg" style="color:#ff5555;font-size:12px;"></p>
 </div>
 </div>
 
@@ -208,11 +210,11 @@ import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/fireb
 
 const firebaseConfig = {
 apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
-  authDomain: "reczssa.firebaseapp.com",
-  projectId: "reczssa",
-  storageBucket: "reczssa.firebasestorage.app",
-  messagingSenderId: "726475292690",
-  appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
+authDomain: "reczssa.firebaseapp.com",
+projectId: "reczssa",
+storageBucket: "reczssa.firebasestorage.app",
+messagingSenderId: "726475292690",
+appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -242,12 +244,15 @@ window.login = async function(){
 const box = document.querySelector(".box");
 const key = document.getElementById("key").value.trim();
 
+/* FIX 1: กันค่าว่าง */
 if(!key){
 box.classList.add("shake");
 toast("ENTER KEY");
 setTimeout(()=>box.classList.remove("shake"),400);
 return;
 }
+
+try {
 
 const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
@@ -260,15 +265,20 @@ return;
 
 const data = snap.data();
 
-if(Date.now() > data.expire){
+/* FIX 2: expire safety */
+if(!data.expire || Date.now() > Number(data.expire)){
 toast("KEY EXPIRED");
 return;
 }
 
 const dev = device();
 
-if(!data.device){
-await setDoc(ref,{...data,device:dev});
+/* FIX 3: device กัน null / "" */
+if(!data.device || data.device === ""){
+await setDoc(ref,{
+...data,
+device:dev
+});
 }
 else if(data.device !== dev){
 toast("DEVICE LOCKED");
@@ -280,6 +290,11 @@ toast("LOGIN SUCCESS");
 
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
+
+} catch(e){
+console.log(e);
+toast("FIREBASE ERROR");
+}
 
 };
 
