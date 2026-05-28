@@ -2,147 +2,200 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>ReczssAA</title>
-
-<link rel="apple-touch-icon" href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
-<link rel="icon" type="image/png" href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VaiperX ULTRA PRO</title>
 
 <style>
 
-/* ===== LOCK SYSTEM ===== */
+/* ================= BACKGROUND ================= */
 body{
     margin:0;
     font-family:Inter;
-    background:#fff8f1;
     overflow:hidden;
+
+    background:url("https://images.unsplash.com/photo-1520975958225-4f6f7a6d3b14?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
 }
 
-/* LOGIN */
-#loginScreen{
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(10px);
+}
+
+/* ================= LOGIN ================= */
+#login{
     position:fixed;
     inset:0;
     display:flex;
-    justify-content:center;
     align-items:center;
-    background:#000;
-    z-index:9999;
+    justify-content:center;
+    z-index:99999;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
 }
 
-.login-box{
+.box{
     width:320px;
-    padding:25px;
     background:#111;
-    border-radius:16px;
-    border:1px solid #333;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #ff0033;
     text-align:center;
-    color:white;
+    animation:pop .4s ease;
 }
 
-.login-box input{
+@keyframes pop{
+    from{transform:scale(.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+input{
     width:100%;
     padding:12px;
-    margin-top:10px;
     border-radius:10px;
     border:none;
+    outline:none;
+    margin-top:10px;
 }
 
-.login-box button{
+button{
     width:100%;
     padding:12px;
-    margin-top:10px;
+    margin-top:12px;
     border:none;
     border-radius:10px;
-    background:orange;
-    font-weight:bold;
+    background:#ff0033;
+    color:#fff;
+    font-weight:800;
+    cursor:pointer;
 }
 
-/* APP HIDE */
+/* shake */
+.shake{animation:shake .3s}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    50%{transform:translateX(6px)}
+    75%{transform:translateX(-6px)}
+    100%{transform:translateX(0)}
+}
+
+/* ================= APP ================= */
 #app{
     display:none;
+    position:relative;
+    z-index:2;
+    animation:fade .5s ease;
 }
 
-/* ===== YOUR ORIGINAL UI (UNCHANGED) ===== */
-
-:root{
-    --bg:#fff8f1;
-    --text:#1f1f1f;
-    --orange:#ff8c00;
-    --green:#00c978;
+@keyframes fade{
+    from{opacity:0;transform:scale(.98)}
+    to{opacity:1;transform:scale(1)}
 }
 
-/* (ย่อ CSS เดิมของคุณไว้ ไม่ต้องแก้ UI เลย) */
-
+/* ================= VAIPER UI (ยัดของคุณ) ================= */
 .window{
-    width:95%;
-    max-width:1350px;
-    height:92vh;
-    margin:20px auto;
-    background:white;
-    border-radius:34px;
-    display:flex;
+    width:90%;
+    max-width:420px;
+    margin:40px auto;
+    background:rgba(13,13,17,0.95);
+    border-radius:30px;
+    padding:25px;
+    color:#fff;
+    box-shadow:0 25px 60px rgba(0,0,0,0.6);
 }
 
-/* (คุณสามารถวาง CSS เดิมทั้งหมดของคุณต่อจากนี้ได้เลย) */
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:14px;
+    margin-top:10px;
+    background:rgba(255,255,255,0.05);
+    border-radius:15px;
+}
+
+.switch{
+    width:40px;height:22px;
+    background:#333;
+    border-radius:20px;
+    position:relative;
+}
+
+.switch::after{
+    content:"";
+    width:18px;height:18px;
+    background:#fff;
+    position:absolute;
+    top:2px;left:2px;
+    border-radius:50%;
+    transition:.2s;
+}
+
+/* ================= TOAST ================= */
+#toast{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:10px 16px;
+    border-radius:10px;
+    color:#fff;
+    font-weight:700;
+    opacity:0;
+    transition:.3s;
+    z-index:999999;
+}
+
+#toast.show{opacity:1;transform:translateX(-50%) translateY(10px)}
 
 </style>
 </head>
 
 <body>
 
-<!-- 🔒 LOGIN -->
-<div id="loginScreen">
-    <div class="login-box">
-        <h2>ENTER KEY</h2>
+<!-- TOAST -->
+<div id="toast"></div>
 
-        <input id="keyInput" placeholder="KEY...">
-
-        <button onclick="login()">LOGIN</button>
-
-        <p id="msg"></p>
-    </div>
+<!-- LOGIN -->
+<div id="login">
+<div class="box">
+<h2 style="color:#fff">ENTER KEY</h2>
+<input id="key" placeholder="KEY">
+<button onclick="login()">LOGIN</button>
+<p id="msg" style="color:#ff5555;font-size:12px;"></p>
+</div>
 </div>
 
-<!-- 🔓 APP -->
+<!-- APP -->
 <div id="app">
 
 <div class="window">
 
-    <!-- 🔥 UI เดิมคุณ (ผมไม่ลบเลย เอามาวางตรงนี้) -->
+<h2>VAIPERX MENU</h2>
 
-    <div class="sidebar">
-        <div class="logo">
-            <img src="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
-            <div>
-                <h1>Reczssa</h1>
-                <p>XX</p>
-            </div>
-        </div>
+<div class="row">
+<span>หัว</span>
+<div class="switch"></div>
+</div>
 
-        <div class="key-box">
-            <span>PREMIUM ACCESS KEY</span>
-            <h2>858525</h2>
-        </div>
+<div class="row">
+<span>ดูดหัว</span>
+<div class="switch"></div>
+</div>
 
-        <div class="nav">
-            <div class="nav-item active"><div class="nav-icon">⚡</div><span>Protection</span></div>
-            <div class="nav-item"><div class="nav-icon">🛡️</div><span>Security</span></div>
-            <div class="nav-item"><div class="nav-icon">🎯</div><span>Target</span></div>
-            <div class="nav-item"><div class="nav-icon">⚙️</div><span>Settings</span></div>
-        </div>
-    </div>
+<div class="row">
+<span>กันแบน</span>
+<div class="switch"></div>
+</div>
 
-    <div class="main">
-        <h2>System Connected</h2>
-
-        <div class="grid">
-            <div class="card">Protection Modules</div>
-            <div class="card">System Controls</div>
-        </div>
-    </div>
+<div class="row">
+<span>กันดำ</span>
+<div class="switch"></div>
+</div>
 
 </div>
 
@@ -153,14 +206,13 @@ body{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* FIREBASE */
 const firebaseConfig = {
-apiKey: "YOUR_KEY",
-authDomain: "YOUR_DOMAIN",
-projectId: "YOUR_ID",
-storageBucket: "YOUR_BUCKET",
-messagingSenderId: "YOUR_ID",
-appId: "YOUR_APP"
+apiKey: "AIzaSyBdSsDIgiB2RvqC0udxgp8YNyBFDsksDUw",
+  authDomain: "reczssa.firebaseapp.com",
+  projectId: "reczssa",
+  storageBucket: "reczssa.firebasestorage.app",
+  messagingSenderId: "726475292690",
+  appId: "1:726475292690:web:12d844b3b605ad650cd8cb"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -168,22 +220,32 @@ const db = getFirestore(app);
 
 /* DEVICE */
 function device(){
-let id = localStorage.getItem("device");
+let id = localStorage.getItem("dev");
 if(!id){
 id = crypto.randomUUID();
-localStorage.setItem("device", id);
+localStorage.setItem("dev",id);
 }
 return id;
 }
 
-/* LOGIN */
-window.login = async () => {
+/* TOAST */
+function toast(text){
+const t = document.getElementById("toast");
+t.innerText = text;
+t.classList.add("show");
+setTimeout(()=>t.classList.remove("show"),2000);
+}
 
-const key = document.getElementById("keyInput").value.trim();
-const msg = document.getElementById("msg");
+/* LOGIN */
+window.login = async function(){
+
+const box = document.querySelector(".box");
+const key = document.getElementById("key").value.trim();
 
 if(!key){
-msg.innerText = "ENTER KEY";
+box.classList.add("shake");
+toast("ENTER KEY");
+setTimeout(()=>box.classList.remove("shake"),400);
 return;
 }
 
@@ -191,34 +253,32 @@ const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
 
 if(!snap.exists()){
-msg.innerText = "INVALID KEY";
+box.classList.add("shake");
+toast("INVALID KEY");
 return;
 }
 
 const data = snap.data();
 
-/* expire */
 if(Date.now() > data.expire){
-msg.innerText = "EXPIRED";
+toast("KEY EXPIRED");
 return;
 }
 
-/* device lock */
 const dev = device();
 
 if(!data.device){
-await setDoc(ref,{
-...data,
-device: dev
-});
+await setDoc(ref,{...data,device:dev});
 }
 else if(data.device !== dev){
-msg.innerText = "DEVICE LOCKED";
+toast("DEVICE LOCKED");
 return;
 }
 
-/* success */
-document.getElementById("loginScreen").style.display="none";
+/* SUCCESS */
+toast("LOGIN SUCCESS");
+
+document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
 
 };
