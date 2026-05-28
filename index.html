@@ -17,6 +17,37 @@ href="https://i.postimg.cc/Gt4fVkYs/IMG-0020.png">
 
 <style>
 
+#loginScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    z-index:9999;
+}
+
+.login-box{
+    width:300px;
+    padding:20px;
+    background:#111;
+    color:white;
+    border-radius:15px;
+    text-align:center;
+}
+
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+}
+
+.login-box button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+}
+
 :root{
     --bg:#fff8f1;
     --card:#ffffff;
@@ -628,10 +659,26 @@ body.unlocked .window{
 }
 
 </head>
+
 <body>
 
-<div class="window">
+<!-- 🔒 LOGIN SCREEN (อยู่บนสุด) -->
+<div id="loginScreen">
+    <div class="login-box">
+        <h1>ENTER KEY</h1>
 
+        <input id="keyInput" placeholder="KEY..." />
+
+        <button id="loginBtn">LOGIN</button>
+
+        <p id="msg"></p>
+    </div>
+</div>
+
+<!-- 🔓 APP (เอา window ของคุณมายัดตรงนี้) -->
+<div id="app" style="display:none;">
+
+    <div class="window">
     <!-- SIDEBAR -->
 
     <div class="sidebar">
@@ -932,6 +979,12 @@ btn.onclick = () => {
 
 <script type="module">
 
+window.onload = () => {
+loginScreen.style.display = "flex";
+appUI.style.display = "none";
+};
+
+
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
@@ -999,103 +1052,55 @@ return id;
    KEY SYSTEM
 ========================= */
 
-async function checkKey(){
+const loginScreen = document.getElementById("loginScreen");
+const appUI = document.getElementById("app");
+const msg = document.getElementById("msg");
 
-document.body.classList.add("locked");
+document.getElementById("loginBtn").onclick = async () => {
 
-const key = prompt("ENTER KEY");
-if(!key) return;
+const key = document.getElementById("keyInput").value.trim();
+
+if(!key){
+msg.innerText = "ใส่คีย์ก่อน";
+return;
+}
 
 const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
 
 if(!snap.exists()){
-    alert("KEY INVALID");
-    location.reload();
-    return;
+msg.innerText = "คีย์ผิด";
+return;
 }
 
 const data = snap.data();
+
+/* หมดอายุ */
+if(Date.now() > data.expire){
+msg.innerText = "คีย์หมดอายุ";
+return;
+}
+
+/* DEVICE */
 const deviceID = getDeviceID();
 
-/* EXPIRE */
-if(Date.now() > data.expire){
-    alert("KEY EXPIRED");
-    location.reload();
-    return;
-}
-
-/* DEVICE LOCK */
 if(!data.device){
-    await setDoc(ref,{
-        ...data,
-        device: deviceID
-    });
+await setDoc(ref,{
+...data,
+device: deviceID
+});
 }
 else if(data.device !== deviceID){
-    alert("KEY ALREADY USED");
-    document.body.innerHTML =
-    "<h1 style='color:red;text-align:center;margin-top:100px'>ACCESS DENIED</h1>";
-    return;
-}
-
-alert("LOGIN SUCCESS");
-
-document.body.classList.remove("locked");
-document.body.classList.add("unlocked");
-}
-
-const data =
-snap.data();
-
-const deviceID =
-getDeviceID();
-
-/* CHECK EXPIRE */
-
-if(
-Date.now() >
-data.expire
-){
-
-alert("KEY EXPIRED");
+msg.innerText = "คีย์ถูกใช้แล้ว";
 return;
-
 }
 
-/* HWID LOCK */
+/* ผ่านแล้ว */
+loginScreen.style.display = "none";
+appUI.style.display = "block";
 
-if(
-!data.device
-){
+};
 
-await setDoc(ref,{
-
-...data,
-
-device:deviceID
-
-});
-
-}
-else if(
-data.device !== deviceID
-){
-
-alert(
-"KEY ALREADY USED"
-);
-
-document.body.innerHTML =
-"<h1 style='color:red;text-align:center;margin-top:100px'>ACCESS DENIED</h1>";
-
-return;
-
-}
-
-alert("LOGIN SUCCESS");
-
-}
 
 checkKey();
 
