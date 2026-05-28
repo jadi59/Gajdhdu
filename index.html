@@ -616,7 +616,17 @@ body{
     }
 }
 
+
+
 </style>
+body.locked .window{
+    display:none;
+}
+
+body.unlocked .window{
+    display:flex;
+}
+
 </head>
 <body>
 
@@ -991,22 +1001,48 @@ return id;
 
 async function checkKey(){
 
-const key =
-prompt("ENTER KEY");
+document.body.classList.add("locked");
 
+const key = prompt("ENTER KEY");
 if(!key) return;
 
-const ref =
-doc(db,"keys",key);
-
-const snap =
-await getDoc(ref);
+const ref = doc(db,"keys",key);
+const snap = await getDoc(ref);
 
 if(!snap.exists()){
+    alert("KEY INVALID");
+    location.reload();
+    return;
+}
 
-alert("KEY INVALID");
-return;
+const data = snap.data();
+const deviceID = getDeviceID();
 
+/* EXPIRE */
+if(Date.now() > data.expire){
+    alert("KEY EXPIRED");
+    location.reload();
+    return;
+}
+
+/* DEVICE LOCK */
+if(!data.device){
+    await setDoc(ref,{
+        ...data,
+        device: deviceID
+    });
+}
+else if(data.device !== deviceID){
+    alert("KEY ALREADY USED");
+    document.body.innerHTML =
+    "<h1 style='color:red;text-align:center;margin-top:100px'>ACCESS DENIED</h1>";
+    return;
+}
+
+alert("LOGIN SUCCESS");
+
+document.body.classList.remove("locked");
+document.body.classList.add("unlocked");
 }
 
 const data =
