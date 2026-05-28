@@ -244,7 +244,6 @@ window.login = async function(){
 const box = document.querySelector(".box");
 const key = document.getElementById("key").value.trim();
 
-/* FIX 1: กันค่าว่าง */
 if(!key){
 box.classList.add("shake");
 toast("ENTER KEY");
@@ -252,46 +251,55 @@ setTimeout(()=>box.classList.remove("shake"),400);
 return;
 }
 
-try {
-
 const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
 
+/* ❌ ไม่มี key */
 if(!snap.exists()){
 box.classList.add("shake");
-toast("INVALID KEY");
+toast("INVALID KEY ❌");
 return;
 }
 
 const data = snap.data();
 
-/* FIX 2: expire safety */
-if(!data.expire || Date.now() > Number(data.expire)){
-toast("KEY EXPIRED");
+/* ❌ banned */
+if(data.banned === true){
+toast("KEY BANNED 🚫");
+return;
+}
+
+/* ❌ expire (กัน type พัง) */
+const expireTime = Number(data.expire || 0);
+
+if(Date.now() > expireTime){
+toast("KEY EXPIRED ⏳");
 return;
 }
 
 const dev = device();
 
-/* FIX 3: device กัน null / "" */
-if(!data.device || data.device === ""){
+/* device lock */
+if(!data.device){
 await setDoc(ref,{
 ...data,
-device:dev
+device:dev,
+used:true
 });
 }
 else if(data.device !== dev){
-toast("DEVICE LOCKED");
+toast("DEVICE LOCKED 🚫");
 return;
 }
 
-/* SUCCESS */
-toast("LOGIN SUCCESS");
+/* success */
+toast("LOGIN SUCCESS ✅");
 
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
 
-} catch(e){
+};
+    catch(e){
 console.log(e);
 toast("FIREBASE ERROR");
 }
