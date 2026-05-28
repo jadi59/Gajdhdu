@@ -7,153 +7,152 @@
 
 <style>
 
-/* ================= BACKGROUND ================= */
+/* ===== BACKGROUND ===== */
 body{
-    margin:0;
-    font-family:Inter;
-    overflow:hidden;
+margin:0;
+font-family:Inter;
+overflow:hidden;
 
-    background:url("https://images.unsplash.com/photo-1520975958225-4f6f7a6d3b14?auto=format&fit=crop&w=1600&q=80");
-    background-size:cover;
-    background-position:center;
+background:url("https://images.unsplash.com/photo-1520975958225-4f6f7a6d3b14?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
 }
 
 body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(255,255,255,0.35);
-    backdrop-filter:blur(10px);
+content:"";
+position:fixed;
+inset:0;
+background:rgba(255,255,255,0.35);
+backdrop-filter:blur(10px);
 }
 
-/* ================= LOGIN ================= */
+/* ===== LOGIN ===== */
 #login{
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:99999;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+background:rgba(0,0,0,0.6);
 }
 
 .box{
-    width:320px;
-    background:#111;
-    padding:25px;
-    border-radius:18px;
-    border:1px solid #ff0033;
-    text-align:center;
-    animation:pop .4s ease;
+width:320px;
+background:#111;
+padding:25px;
+border-radius:18px;
+border:1px solid #ff0033;
+text-align:center;
+animation:pop .3s ease;
 }
 
 @keyframes pop{
-    from{transform:scale(.8);opacity:0}
-    to{transform:scale(1);opacity:1}
+from{transform:scale(.8);opacity:0}
+to{transform:scale(1);opacity:1}
 }
 
 input{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    outline:none;
-    margin-top:10px;
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+margin-top:10px;
+outline:none;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    margin-top:12px;
-    border:none;
-    border-radius:10px;
-    background:#ff0033;
-    color:#fff;
-    font-weight:800;
-    cursor:pointer;
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+background:#ff0033;
+color:#fff;
+font-weight:800;
+cursor:pointer;
 }
 
-/* shake */
 .shake{animation:shake .3s}
+
 @keyframes shake{
-    0%{transform:translateX(0)}
-    25%{transform:translateX(-6px)}
-    50%{transform:translateX(6px)}
-    75%{transform:translateX(-6px)}
-    100%{transform:translateX(0)}
+0%{transform:translateX(0)}
+25%{transform:translateX(-6px)}
+50%{transform:translateX(6px)}
+75%{transform:translateX(-6px)}
+100%{transform:translateX(0)}
 }
 
-/* ================= APP ================= */
+/* ===== APP ===== */
 #app{
-    display:none;
-    position:relative;
-    z-index:2;
-    animation:fade .5s ease;
+display:none;
+position:relative;
+z-index:2;
+animation:fade .4s ease;
 }
 
 @keyframes fade{
-    from{opacity:0;transform:scale(.98)}
-    to{opacity:1;transform:scale(1)}
+from{opacity:0;transform:scale(.98)}
+to{opacity:1;transform:scale(1)}
 }
 
-/* ================= VAIPER UI (เดิมคุณ) ================= */
+/* ===== UI เดิมคุณ ===== */
 .window{
-    width:90%;
-    max-width:420px;
-    margin:40px auto;
-    background:rgba(13,13,17,0.95);
-    border-radius:30px;
-    padding:25px;
-    color:#fff;
-    box-shadow:0 25px 60px rgba(0,0,0,0.6);
+width:90%;
+max-width:420px;
+margin:40px auto;
+background:rgba(13,13,17,0.95);
+border-radius:30px;
+padding:25px;
+color:#fff;
+box-shadow:0 25px 60px rgba(0,0,0,0.6);
 }
 
 .row{
-    display:flex;
-    justify-content:space-between;
-    padding:14px;
-    margin-top:10px;
-    background:rgba(255,255,255,0.05);
-    border-radius:15px;
+display:flex;
+justify-content:space-between;
+padding:14px;
+margin-top:10px;
+background:rgba(255,255,255,0.05);
+border-radius:15px;
 }
 
 .switch{
-    width:40px;height:22px;
-    background:#333;
-    border-radius:20px;
-    position:relative;
+width:40px;height:22px;
+background:#333;
+border-radius:20px;
+position:relative;
 }
 
 .switch::after{
-    content:"";
-    width:18px;height:18px;
-    background:#fff;
-    position:absolute;
-    top:2px;left:2px;
-    border-radius:50%;
-    transition:.2s;
+content:"";
+width:18px;height:18px;
+background:#fff;
+position:absolute;
+top:2px;left:2px;
+border-radius:50%;
+transition:.2s;
 }
 
-/* ================= TOAST ================= */
+/* ===== TOAST ===== */
 #toast{
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    padding:10px 16px;
-    border-radius:10px;
-    color:#fff;
-    font-weight:700;
-    opacity:0;
-    transition:.3s;
-    z-index:999999;
-    background:#ff0033;
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+padding:10px 16px;
+border-radius:10px;
+background:#ff0033;
+color:#fff;
+font-weight:700;
+opacity:0;
+transition:.3s;
+z-index:99999;
 }
 
 #toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(10px);
+opacity:1;
+transform:translateX(-50%) translateY(10px);
 }
 
 </style>
@@ -179,28 +178,12 @@ button{
 
 <h2>VAIPERX MENU</h2>
 
-<div class="row">
-<span>หัว</span>
-<div class="switch"></div>
-</div>
-
-<div class="row">
-<span>ดูดหัว</span>
-<div class="switch"></div>
-</div>
-
-<div class="row">
-<span>กันแบน</span>
-<div class="switch"></div>
-</div>
-
-<div class="row">
-<span>กันดำ</span>
-<div class="switch"></div>
-</div>
+<div class="row"><span>หัว</span><div class="switch"></div></div>
+<div class="row"><span>ดูดหัว</span><div class="switch"></div></div>
+<div class="row"><span>กันแบน</span><div class="switch"></div></div>
+<div class="row"><span>กันดำ</span><div class="switch"></div></div>
 
 </div>
-
 </div>
 
 <script type="module">
@@ -241,9 +224,12 @@ setTimeout(()=>t.classList.remove("show"),2000);
 /* LOGIN */
 window.login = async function(){
 
+try{
+
 const box = document.querySelector(".box");
 const key = document.getElementById("key").value.trim();
 
+/* empty */
 if(!key){
 box.classList.add("shake");
 toast("ENTER KEY");
@@ -254,7 +240,7 @@ return;
 const ref = doc(db,"keys",key);
 const snap = await getDoc(ref);
 
-/* ❌ ไม่มี key */
+/* not found */
 if(!snap.exists()){
 box.classList.add("shake");
 toast("INVALID KEY ❌");
@@ -263,13 +249,13 @@ return;
 
 const data = snap.data();
 
-/* ❌ banned */
+/* banned */
 if(data.banned === true){
 toast("KEY BANNED 🚫");
 return;
 }
 
-/* ❌ expire (กัน type พัง) */
+/* expire */
 const expireTime = Number(data.expire || 0);
 
 if(Date.now() > expireTime){
@@ -277,9 +263,9 @@ toast("KEY EXPIRED ⏳");
 return;
 }
 
+/* device lock */
 const dev = device();
 
-/* device lock */
 if(!data.device){
 await setDoc(ref,{
 ...data,
@@ -298,10 +284,11 @@ toast("LOGIN SUCCESS ✅");
 document.getElementById("login").style.display="none";
 document.getElementById("app").style.display="block";
 
-};
-    catch(e){
+}
+
+catch(e){
 console.log(e);
-toast("FIREBASE ERROR");
+toast("FIREBASE ERROR ❌");
 }
 
 };
